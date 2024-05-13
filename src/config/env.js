@@ -1,5 +1,12 @@
-import { config } from 'dotenv';
+const { config } = require('dotenv');
+const { get } = require('env-var');
 
 config();
 
-export const port = process.env.PORT || 5000;
+const port = get('PORT').required().asPortNumber();
+const public_path = get('PATH').required().asString();
+
+module.exports = {
+	port,
+	public_path,
+};
